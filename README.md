@@ -1,6 +1,7 @@
 # web_blocker
 
 ----------- FUNCIONALIDAD -----------
+
 Bloquea las páginas de Internet que desees. 
 
 ----------- REQUISITOS --------------
