@@ -7,7 +7,10 @@ Bloquea las páginas de Internet que desees.
 ----------- REQUISITOS --------------
 
 Es necesario tener python 3 instalado. 
+<<<<<<< HEAD
 
+=======
+>>>>>>> c5b07c0079ae7bab240197ff2d245ae8a5a706c4
 Así mismo, este código solo funciona para usuarios de Linux.
 
 Si se desea usar en windows o IOS, deberás buscar la dirección de tu archivo de configuración hosts. En Linux, se encuentra en /etc/hosts.
