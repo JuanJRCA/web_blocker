@@ -1,6 +1,5 @@
 import tkinter
 from gui import Gui
-from DocumentManager import DocumentManager
 ''' 
 Launch the program. root creates the object that the Gui will use.
 Once we close the gui, the program will stop.

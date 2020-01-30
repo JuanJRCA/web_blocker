@@ -15,29 +15,57 @@ class DocumentManager(object):
         self.path_save_blocked_websites = str(absolute_path)
         self.hosts = r"/etc/hosts"
 
-    def write_web_in_document(self):
+    def add_website_to_hosts_to_block(self):
         '''Writes data in the documents.'''
 
         with open(self.path_save_blocked_websites, "r+") as file:
-            blocked_websites = file.read()
+            self._write_data_in_file(file)
 
-            if self.data in blocked_websites:
-                pass
-            else:
-                file.write(self.redirection + "    " +
-                           str(self.data) + "\n")
 
-    def delete_web_from_document(self):
+    def delete_web_from_host_to_unblock(self):
 
         ''' Deletes data from both documents'''
         with open(self.path_save_blocked_websites, "r+") as file:
-            blocked_websites = file.readlines()
-            file.seek(0)
+                self._delete_data_from_file(file)
 
-            webs_to_write = [web for web in blocked_websites if self.data not in web]
-            for web in webs_to_write:
-                file.write(str(web))
-            file.truncate()
+
+
+    def _write_data_in_file(self, pageRead):
+
+        file_read = pageRead.readlines()
+        if not (self._check_if_data_in_file()):
+
+            pageRead.write(self.redirection + "    " +
+                           str(self.data) + "\n")
+
+
+
+    def _delete_data_from_file(self, pageRead):
+
+        file_read = pageRead.readlines()
+        pageRead.seek(0)
+        if self._check_if_data_in_file():
+
+            data_to_write = [data for data in file_read
+                             if self.data not in data]
+
+            for data in data_to_write:
+                pageRead.write(str(data))
+            pageRead.truncate()
+
+    def _check_if_data_in_file(self):
+        with open(self.path_save_blocked_websites, "r+") as file:
+            file_open = file.readlines()
+
+            data_in_file = [self.data for information_file in file_open
+                            if self.data in information_file]
+
+
+            if len(data_in_file) != 0:
+                return True
+            else:
+                return False
+
 
 
 
