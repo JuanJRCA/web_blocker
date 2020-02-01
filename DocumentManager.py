@@ -21,11 +21,16 @@ class DocumentManager(object):
         with open(self.path_save_blocked_websites, "r+") as file:
             self._write_data_in_file(file)
 
+        with open(self.hosts, "r+") as file_block:
+            self._write_data_in_file(file_block)
+
 
     def delete_web_from_host_to_unblock(self):
 
         ''' Deletes data from both documents'''
         with open(self.path_save_blocked_websites, "r+") as file:
+                self._delete_data_from_file(file)
+        with open(self.hosts, "r+") as file:
                 self._delete_data_from_file(file)
 
 
@@ -54,11 +59,11 @@ class DocumentManager(object):
             pageRead.truncate()
 
     def _check_if_data_in_file(self):
-        with open(self.path_save_blocked_websites, "r+") as file:
+        with open(self.hosts, "r+") as file:
             file_open = file.readlines()
 
-            data_in_file = [self.data for information_file in file_open
-                            if self.data in information_file]
+            data_in_file = [self.data for information_in_file in file_open
+                            if self.data in information_in_file]
 
 
             if len(data_in_file) != 0:
@@ -66,6 +71,12 @@ class DocumentManager(object):
             else:
                 return False
 
+    def _is_correct_web_name(self):
+
+        if not self.data or "." not in self.data:
+            return False
+        else:
+            return True
 
 
 

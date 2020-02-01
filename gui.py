@@ -32,9 +32,9 @@ class Gui():
                                              self.unblock_website())
         plot_unblock_button.pack(side=tkinter.LEFT)
 
-        self.Frame2 = tkinter.Frame(root)
-        self.Frame2.pack()
-        self.Label = tkinter.Label(master=self.Frame2, text=None)
+        self.frame_message = tkinter.Frame(root)
+        self.frame_message.pack()
+        self.Label = tkinter.Label(master=self.frame_message, text=None)
         self.Label.pack(side=tkinter.BOTTOM)
 
     def unblock_website(self):
@@ -43,8 +43,9 @@ class Gui():
 
         self._input_entry()
 
-        if self.document_handler.data == "" or "." not in self.document_handler.data:
-            print("No has introducido ninguna web")
+        if not self.document_handler._is_correct_web_name():
+            self.Label["text"] = "No has añadido ninguna web"
+
         else:
             if self.document_handler._check_if_data_in_file():
                 self.document_handler.delete_web_from_host_to_unblock()
@@ -57,8 +58,8 @@ class Gui():
         has introduced'''
 
         self._input_entry()
-        if not self.document_handler.data or "." not in self.document_handler.data:
-            print("No has introducido ninguna web")
+        if not self.document_handler._is_correct_web_name():
+            self.Label["text"] = "No has añadido ninguna web"
         else:
             if not(self.document_handler._check_if_data_in_file()):
                 self.document_handler.add_website_to_hosts_to_block()
@@ -74,6 +75,7 @@ class Gui():
 
         self.start_entry = self.start_entry.delete(0, 'end')
         self.start_entry = original
+
 
 
 
